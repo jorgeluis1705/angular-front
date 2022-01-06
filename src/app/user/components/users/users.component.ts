@@ -34,6 +34,10 @@ export class UsersComponent implements OnInit {
     'direccion',
     'acciones',
   ];
-  onName(id: string): void {}
-  onDelte(id: string): void {}
+  onName(id: string): void {
+    console.log(id);
+  }
+  onDelte(id: string): void {
+    console.log(id);
+  }
 }

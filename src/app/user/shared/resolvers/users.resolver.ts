@@ -1,4 +1,4 @@
-import { GET_USERS } from './../../../client/user/mutations';
+import { GET_USERS } from './../../../client/user/queries';
 import { Apollo } from 'apollo-angular';
 import { IUser } from './../models/user.model';
 import { Injectable } from '@angular/core';
