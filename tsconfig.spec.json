@@ -5,6 +5,11 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
+    ],
+    "lib": [
+      "es2020",
+      "dom",
+      "esnext.asynciterable"
     ]
   },
   "files": [
