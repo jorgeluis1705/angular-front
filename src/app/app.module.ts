@@ -12,6 +12,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { apolloclient } from './client/client';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/users.reducer';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,6 +23,7 @@ import { userReducer } from './store/reducers/users.reducer';
     UserModule,
     HttpClientModule,
     StoreModule.forRoot({ users: userReducer }),
+    ReactiveFormsModule,
   ],
   providers: [
     {

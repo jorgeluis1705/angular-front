@@ -6,9 +6,15 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './components/user/user.component';
 import { UsersComponent } from './components/users/users.component';
 import { UsersMainComponent } from './components/users-main/users-main.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [UserComponent, UsersComponent, UsersMainComponent],
-  imports: [CommonModule, MaterialModule, UserRoutingModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    UserRoutingModule,
+    ReactiveFormsModule,
+  ],
 })
 export class UserModule {}
