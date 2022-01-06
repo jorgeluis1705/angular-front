@@ -32,5 +32,8 @@ export class UsersComponent implements OnInit {
     'apellidoM',
     'telefono',
     'direccion',
+    'acciones',
   ];
+  onName(id: string): void {}
+  onDelte(id: string): void {}
 }
