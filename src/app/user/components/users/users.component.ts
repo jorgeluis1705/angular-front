@@ -1,4 +1,7 @@
-import { getUsersActions } from './../../../store/actions/user.actions';
+import {
+  deleteUserAction,
+  getUsersActions,
+} from './../../../store/actions/user.actions';
 import { IUser } from './../../shared/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -51,7 +54,11 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users', id]);
   }
   onDelte(id: string): void {
-    console.log(id);
+    this.store.dispatch(
+      deleteUserAction({
+        id,
+      })
+    );
   }
   click() {}
 }

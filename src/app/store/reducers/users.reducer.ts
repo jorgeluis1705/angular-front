@@ -1,5 +1,9 @@
 import { Apollo } from 'apollo-angular';
-import { getUsersActions, getUserActions } from './../actions/user.actions';
+import {
+  getUsersActions,
+  getUserActions,
+  deleteUserAction,
+} from './../actions/user.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IUser } from 'src/app/user/shared/models/user.model';
 
@@ -36,6 +40,12 @@ const _userReducer = createReducer(
     return {
       ...state,
       userSelected: actions.user,
+    };
+  }),
+  on(deleteUserAction, (state, actions) => {
+    return {
+      ...state,
+      users: state.users.filter((element) => element.id !== actions.id),
     };
   })
 );

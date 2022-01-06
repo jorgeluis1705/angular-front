@@ -9,3 +9,7 @@ export const getUserActions = createAction(
   '[get User] user find one',
   props<{ user: IUser }>()
 );
+export const deleteUserAction = createAction(
+  '[delete User] user delete one',
+  props<{ id: string }>()
+);
