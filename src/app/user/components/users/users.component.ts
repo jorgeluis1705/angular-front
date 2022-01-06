@@ -86,7 +86,7 @@ export class UsersComponent implements OnInit {
           }
         },
       })
-      .subscribe((e) => console.log(e));
+      .subscribe((e) => e);
   }
   click() {}
 }
