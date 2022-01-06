@@ -24,11 +24,13 @@ export class UsersResolver implements Resolve<IUser[]> {
         .watchQuery({
           query: GET_USERS,
         })
-        .valueChanges.subscribe((result: any) => {
-          console.log(result);
+        .valueChanges.subscribe({
+          next: (e: any) => {
+            obs.next(e.data?.getUsers);
+            obs.complete();
+          },
+          error: (err) => obs.error(err),
         });
-      obs.next([]);
-      obs.complete();
     });
   }
 }
