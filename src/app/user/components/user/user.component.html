@@ -1,53 +1,56 @@
-<form autocomplete="off" [formGroup]="userForm">
-  <div class="container" style="display: flex;flex-direction: column; ">
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label> Nombre
-      </mat-label>
-      <input matInput name="nombre" formControlName="nombre" required>
-    </mat-form-field>
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label> Apellido Paterno
-      </mat-label>
-      <input matInput name="apellidoPaterno" formControlName="apellidoPaterno" required>
-    </mat-form-field>
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label> apellidoMaterno
-      </mat-label>
-      <input matInput name="apellidoMaterno" formControlName="apellidoMaterno" required>
-    </mat-form-field>
+<div class="container" style="display: flex;flex-direction: row;">
+  <form autocomplete="off" [formGroup]="userForm" style="width: 50vw;">
+    <div class="container" style="display: flex;flex-direction: column; ">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> Nombre
+        </mat-label>
+        <input matInput name="nombre" formControlName="nombre" required>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> Apellido Paterno
+        </mat-label>
+        <input matInput name="apellidoPaterno" formControlName="apellidoPaterno" required>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> apellidoMaterno
+        </mat-label>
+        <input matInput name="apellidoMaterno" formControlName="apellidoMaterno" required>
+      </mat-form-field>
 
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>telefono
-      </mat-label>
-      <input matInput name="telefono" formControlName="telefono" required>
-    </mat-form-field>
-  </div>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>telefono
+        </mat-label>
+        <input matInput name="telefono" formControlName="telefono" required>
+      </mat-form-field>
+    </div>
 
-</form>
-<form autocomplete="off" [formGroup]="directionForm">
-  <div class="container" style="display: flex;flex-direction: column; ">
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label> calle
-      </mat-label>
-      <input matInput name="calle" formControlName="calle" required>
-    </mat-form-field>
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label> ciudad
-      </mat-label>
-      <input matInput name="ciudad" formControlName="ciudad" required>
-    </mat-form-field>
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label> numero
-      </mat-label>
-      <input matInput name="numero" formControlName="numero" required>
-    </mat-form-field>
+  </form>
+  <form autocomplete="off" [formGroup]="directionForm" style="width: 50vw;">
+    <div class="container" style="display: flex;flex-direction: column; ">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> calle
+        </mat-label>
+        <input matInput name="calle" formControlName="calle" required>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> ciudad
+        </mat-label>
+        <input matInput name="ciudad" formControlName="ciudad" required>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> numero
+        </mat-label>
+        <input matInput name="numero" formControlName="numero" required>
+      </mat-form-field>
 
-    <mat-form-field class="form-field" appearance="outline">
-      <mat-label>estado
-      </mat-label>
-      <input matInput name="estado" formControlName="estado" required>
-    </mat-form-field>
-  </div>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>estado
+        </mat-label>
+        <input matInput name="estado" formControlName="estado" required>
+      </mat-form-field>
+    </div>
 
-</form>
+  </form>
+</div>
 <h1>{{userForm.value| json}}</h1>
+<h1>{{directionForm.value| json}}</h1>
