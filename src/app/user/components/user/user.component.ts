@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { GET_USERS } from 'src/app/client/user/queries';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user',
@@ -37,7 +38,8 @@ export class UserComponent implements OnInit {
     private store: Store<{ users: any }>,
     protected router: Router,
     private formbuilder: FormBuilder,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private _snackBar: MatSnackBar
   ) {
     this.store.dispatch(
       getUserActions({
@@ -115,8 +117,12 @@ export class UserComponent implements OnInit {
         },
       })
       .subscribe({
-        next: (resp: any) =>
-          this.store.dispatch(getUserActions({ user: resp.data.updateUSer })),
+        next: (resp: any) => {
+          this.store.dispatch(getUserActions({ user: resp.data.updateUSer }));
+          this._snackBar.open('Se actualizo correctamente', '', {
+            duration: 1500,
+          });
+        },
         complete: () => this.router.navigate(['/users']),
       });
   }

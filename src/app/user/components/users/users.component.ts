@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users',
@@ -23,7 +24,8 @@ export class UsersComponent implements OnInit {
     private activate: ActivatedRoute,
     private store: Store<{ users: any }>,
     protected router: Router,
-    private apollo: Apollo
+    private apollo: Apollo,
+    private _snackBar: MatSnackBar
   ) {
     this.store.dispatch(
       getUsersActions({
