@@ -1,3 +1,6 @@
+import { GET_USERS } from './../../../client/user/queries';
+import { DELETE_USER } from './../../../client/user/mutations';
+import { Apollo } from 'apollo-angular';
 import {
   deleteUserAction,
   getUsersActions,
@@ -19,7 +22,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private activate: ActivatedRoute,
     private store: Store<{ users: any }>,
-    protected router: Router
+    protected router: Router,
+    private apollo: Apollo
   ) {
     this.store.dispatch(
       getUsersActions({
@@ -59,6 +63,30 @@ export class UsersComponent implements OnInit {
         id,
       })
     );
+    this.apollo
+      .mutate({
+        mutation: DELETE_USER,
+        variables: { id },
+        update: (cache, { data }) => {
+          if (data) {
+            const existing: any = cache.readQuery({
+              query: GET_USERS,
+            });
+            if (existing) {
+              cache.writeQuery({
+                query: GET_USERS,
+
+                data: {
+                  getUsers: (existing.getUsers as IUser[]).filter(
+                    (e) => e.id !== id
+                  ),
+                },
+              });
+            }
+          }
+        },
+      })
+      .subscribe((e) => console.log(e));
   }
   click() {}
 }
