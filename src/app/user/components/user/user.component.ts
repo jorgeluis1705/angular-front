@@ -1,3 +1,5 @@
+import { GET_USER } from './../../../client/user/queries';
+import { UPDATE_USER } from './../../../client/user/mutations';
 import { getUserActions } from './../../../store/actions/user.actions';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,6 +7,8 @@ import { Store } from '@ngrx/store';
 import { IUser } from '../../shared/models/user.model';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Apollo } from 'apollo-angular';
+import { GET_USERS } from 'src/app/client/user/queries';
 
 @Component({
   selector: 'app-user',
@@ -32,7 +36,8 @@ export class UserComponent implements OnInit {
     private activate: ActivatedRoute,
     private store: Store<{ users: any }>,
     protected router: Router,
-    private formbuilder: FormBuilder
+    private formbuilder: FormBuilder,
+    private apollo: Apollo
   ) {
     this.store.dispatch(
       getUserActions({
@@ -59,11 +64,60 @@ export class UserComponent implements OnInit {
   }
   onSubmit() {
     this.user = {
+      id: this.user.id,
       ...this.userForm.value,
       direccion: {
         ...this.directionForm.value,
       },
     };
-    console.log(this.user);
+
+    this.apollo
+      .mutate({
+        mutation: UPDATE_USER,
+        variables: {
+          ...this.user,
+        },
+        update: (cache, { data }) => {
+          if (data) {
+            const existingArray: any = cache.readQuery({
+              query: GET_USERS,
+            });
+            const existingItem: any = cache.readQuery({
+              query: GET_USER,
+              variables: {
+                id: this.user.id,
+              },
+            });
+            if (existingArray) {
+              cache.writeQuery({
+                query: GET_USERS,
+
+                data: {
+                  getUsers: (existingArray.getUsers as IUser[]).map((e) =>
+                    e.id === this.user.id ? (e = this.user) : e
+                  ),
+                },
+              });
+            }
+            if (existingItem) {
+              cache.writeQuery({
+                query: GET_USER,
+                variables: {
+                  id: this.user.id,
+                },
+
+                data: {
+                  getUser: this.user,
+                },
+              });
+            }
+          }
+        },
+      })
+      .subscribe({
+        next: (resp: any) =>
+          this.store.dispatch(getUserActions({ user: resp.data.updateUSer })),
+        complete: () => this.router.navigate(['/users']),
+      });
   }
 }
