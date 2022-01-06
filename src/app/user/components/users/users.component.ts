@@ -1,7 +1,7 @@
 import { getUserActions } from './../../../store/actions/user.actions';
 import { IUser } from './../../shared/models/user.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -15,7 +15,8 @@ export class UsersComponent implements OnInit {
   userStore: Observable<any>;
   constructor(
     private activate: ActivatedRoute,
-    private store: Store<{ users: any }>
+    private store: Store<{ users: any }>,
+    protected router: Router
   ) {
     this.store.dispatch(
       getUserActions({
@@ -47,7 +48,7 @@ export class UsersComponent implements OnInit {
     'acciones',
   ];
   onName(id: string): void {
-    console.log(id);
+    this.router.navigate(['', id]);
   }
   onDelte(id: string): void {
     console.log(id);

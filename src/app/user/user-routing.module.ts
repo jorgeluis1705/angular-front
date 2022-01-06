@@ -17,7 +17,7 @@ const routes: Routes = [
         resolve: { users: UsersResolver },
       },
       {
-        path: 'detalles',
+        path: ':id',
         component: UserComponent,
       },
     ],
