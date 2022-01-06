@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { apolloclient } from './client/client';
-
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './store/reducers/users.reducer';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,6 +21,7 @@ import { apolloclient } from './client/client';
     MaterialModule,
     UserModule,
     HttpClientModule,
+    StoreModule.forRoot({ users: userReducer }),
   ],
   providers: [
     {

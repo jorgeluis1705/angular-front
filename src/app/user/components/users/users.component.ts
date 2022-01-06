@@ -1,7 +1,10 @@
+import { getUserActions } from './../../../store/actions/user.actions';
 import { IUser } from './../../shared/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -10,10 +13,14 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class UsersComponent implements OnInit {
   users: IUser[] = [];
-
-  constructor(private activate: ActivatedRoute) {
+  count$: Observable<number>;
+  constructor(
+    private activate: ActivatedRoute,
+    private store: Store<{ users: number }>
+  ) {
     console.log(this.activate.snapshot.data);
     this.users = (this.activate.snapshot.data as any).users as IUser[];
+    this.count$ = store.select('users');
   }
 
   dataSource: MatTableDataSource<IUser> | undefined;
@@ -39,5 +46,11 @@ export class UsersComponent implements OnInit {
   }
   onDelte(id: string): void {
     console.log(id);
+  }
+  click() {
+    console.log('XD');
+    this.store.dispatch(getUserActions());
+    console.log(this.store);
+    this.count$.subscribe((e) => console.log(e));
   }
 }
