@@ -25,10 +25,10 @@ export const initialState: IinitialState = {
 
 const _userReducer = createReducer(
   initialState,
-  on(getUserActions, (state) => {
+  on(getUserActions, (state, action) => {
     return {
       ...state,
-      users: [],
+      users: action.usersFetch,
     };
   })
 );

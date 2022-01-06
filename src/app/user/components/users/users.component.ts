@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
   }
   click() {
     console.log('XD');
-    this.store.dispatch(getUserActions());
+    this.store.dispatch(getUserActions({ usersFetch: this.users }));
     console.log(this.store);
     this.count$.subscribe((e) => console.log(e));
   }
