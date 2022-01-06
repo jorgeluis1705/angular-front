@@ -12,15 +12,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  users: IUser[] = [];
-  count$: Observable<number>;
+  userStore: Observable<any>;
   constructor(
     private activate: ActivatedRoute,
-    private store: Store<{ users: number }>
+    private store: Store<{ users: any }>
   ) {
-    console.log(this.activate.snapshot.data);
-    this.users = (this.activate.snapshot.data as any).users as IUser[];
-    this.count$ = store.select('users');
+    this.store.dispatch(
+      getUserActions({
+        usersFetch: (this.activate.snapshot.data as any).users as IUser[],
+      })
+    );
+    this.userStore = store.select('users');
   }
 
   dataSource: MatTableDataSource<IUser> | undefined;
@@ -30,7 +32,10 @@ export class UsersComponent implements OnInit {
     this.dataSource!.filter = filterValue.trim().toLowerCase();
   }
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.users);
+    this.userStore.subscribe({
+      next: (e) => (this.dataSource = new MatTableDataSource(e.users)),
+      error: () => (this.dataSource = new MatTableDataSource([] as IUser[])),
+    });
   }
   displayedColumns: string[] = [
     'position',
@@ -47,10 +52,5 @@ export class UsersComponent implements OnInit {
   onDelte(id: string): void {
     console.log(id);
   }
-  click() {
-    console.log('XD');
-    this.store.dispatch(getUserActions({ usersFetch: this.users }));
-    console.log(this.store);
-    this.count$.subscribe((e) => console.log(e));
-  }
+  click() {}
 }
