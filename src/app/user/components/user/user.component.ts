@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   };
   userStore!: Observable<any>;
   userForm: FormGroup = new FormGroup({});
-
+  directionForm: FormGroup = new FormGroup({});
   constructor(
     private activate: ActivatedRoute,
     private store: Store<{ users: any }>,
@@ -51,9 +51,15 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.userForm = this.formbuilder.group({
       nombre: [this.user.nombre, Validators.required],
-      apellidoMaterno: new FormControl(this.user.apellidoMaterno),
-      apellidoPaterno: new FormControl(this.user.apellidoPaterno),
-      telefono: new FormControl(this.user.telefono),
+      apellidoMaterno: [this.user.apellidoMaterno, [Validators.required]],
+      apellidoPaterno: [this.user.apellidoPaterno, [Validators.required]],
+      telefono: [this.user.telefono, [Validators.required]],
+    });
+    this.directionForm = this.formbuilder.group({
+      calle: [this.user.direccion.calle],
+      ciudad: [this.user.direccion.ciudad],
+      numero: [this.user.direccion.numero],
+      estado: [this.user.direccion.estado],
     });
   }
 }
