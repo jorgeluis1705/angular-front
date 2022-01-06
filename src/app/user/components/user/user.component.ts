@@ -4,12 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IUser } from '../../shared/models/user.model';
 import { Observable } from 'rxjs';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -56,10 +51,19 @@ export class UserComponent implements OnInit {
       telefono: [this.user.telefono, [Validators.required]],
     });
     this.directionForm = this.formbuilder.group({
-      calle: [this.user.direccion.calle],
-      ciudad: [this.user.direccion.ciudad],
-      numero: [this.user.direccion.numero],
-      estado: [this.user.direccion.estado],
+      calle: [this.user.direccion.calle, [Validators.required]],
+      ciudad: [this.user.direccion.ciudad, [Validators.required]],
+      numero: [this.user.direccion.numero, [Validators.required]],
+      estado: [this.user.direccion.estado, [Validators.required]],
     });
+  }
+  onSubmit() {
+    this.user = {
+      ...this.userForm.value,
+      direccion: {
+        ...this.directionForm.value,
+      },
+    };
+    console.log(this.user);
   }
 }

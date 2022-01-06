@@ -1,5 +1,5 @@
-<div class="container" style="display: flex;flex-direction: row;">
-  <form autocomplete="off" [formGroup]="userForm" style="width: 50vw;">
+<div class="container" ngS style="display: flex;flex-direction: row;">
+  <form (ngSubmit)="onSubmit()" autocomplete="off" [formGroup]="userForm" style="width: 50vw;">
     <div class="container" style="display: flex;flex-direction: column; ">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label> Nombre
@@ -25,7 +25,7 @@
     </div>
 
   </form>
-  <form autocomplete="off" [formGroup]="directionForm" style="width: 50vw;">
+  <form (ngSubmit)="onSubmit()" autocomplete="off" [formGroup]="directionForm" style="width: 50vw;">
     <div class="container" style="display: flex;flex-direction: column; ">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label> calle
@@ -49,8 +49,8 @@
         <input matInput name="estado" formControlName="estado" required>
       </mat-form-field>
     </div>
-
+    <button mat-raised-button type="submit" color="primary" [disabled]="userForm.invalid && directionForm.invalid">
+      Editar
+    </button>
   </form>
 </div>
-<h1>{{userForm.value| json}}</h1>
-<h1>{{directionForm.value| json}}</h1>
