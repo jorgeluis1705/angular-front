@@ -1,3 +1,4 @@
+import { IUser } from './../../shared/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,8 +8,10 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  constructor(private actovate: ActivatedRoute) {
-    console.log(this.actovate.snapshot.data);
+  users: IUser[] = [];
+  constructor(private activate: ActivatedRoute) {
+    console.log(this.activate.snapshot.data);
+    this.users = (this.activate.snapshot.data as any).users as IUser[];
   }
 
   ngOnInit(): void {}

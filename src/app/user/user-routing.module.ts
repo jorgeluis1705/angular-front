@@ -6,7 +6,7 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
-    resolve: [UsersResolver],
+    resolve: { users: UsersResolver },
     path: '',
     component: UsersComponent,
     children: [
