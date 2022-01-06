@@ -1,4 +1,5 @@
-import { getUserActions } from './../actions/user.actions';
+import { Apollo } from 'apollo-angular';
+import { getUsersActions, getUserActions } from './../actions/user.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IUser } from 'src/app/user/shared/models/user.model';
 
@@ -25,10 +26,16 @@ export const initialState: IinitialState = {
 
 const _userReducer = createReducer(
   initialState,
-  on(getUserActions, (state, action) => {
+  on(getUsersActions, (state, action) => {
     return {
       ...state,
       users: action.usersFetch,
+    };
+  }),
+  on(getUserActions, (state, actions) => {
+    return {
+      ...state,
+      userSelected: actions.user,
     };
   })
 );

@@ -1,3 +1,4 @@
+import { UserResolver } from './shared/resolvers/user.resolver';
 import { UsersMainComponent } from './components/users-main/users-main.component';
 import { UsersResolver } from './shared/resolvers/users.resolver';
 import { UserComponent } from './components/user/user.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
       {
         path: ':id',
         component: UserComponent,
+        resolve: { user: UserResolver },
       },
     ],
   },

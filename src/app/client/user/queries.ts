@@ -19,7 +19,7 @@ export const GET_USERS = gql`
 
 export const GET_USER = gql`
   query getUser($id: String) {
-    getUser(id: Sid) {
+    getUser(id: $id) {
       nombre
       apellidoPaterno
       apellidoMaterno

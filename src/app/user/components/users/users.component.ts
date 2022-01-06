@@ -1,4 +1,4 @@
-import { getUserActions } from './../../../store/actions/user.actions';
+import { getUsersActions } from './../../../store/actions/user.actions';
 import { IUser } from './../../shared/models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
     protected router: Router
   ) {
     this.store.dispatch(
-      getUserActions({
+      getUsersActions({
         usersFetch: (this.activate.snapshot.data as any).users as IUser[],
       })
     );
@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit {
     'acciones',
   ];
   onName(id: string): void {
-    this.router.navigate(['', id]);
+    this.router.navigate(['/users', id]);
   }
   onDelte(id: string): void {
     console.log(id);
