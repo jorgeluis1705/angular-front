@@ -2,7 +2,7 @@ import { CREATE_USER } from './../../../client/user/mutations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { IUser } from '../../shared/models/user.model';
@@ -33,7 +33,6 @@ export class UserNewComponent implements OnInit {
   userForm: FormGroup = new FormGroup({});
   directionForm: FormGroup = new FormGroup({});
   constructor(
-    private activate: ActivatedRoute,
     protected router: Router,
     private formbuilder: FormBuilder,
     private apollo: Apollo,
