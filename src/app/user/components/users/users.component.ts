@@ -59,11 +59,6 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users', id]);
   }
   onDelte(id: string): void {
-    this.store.dispatch(
-      deleteUserAction({
-        id,
-      })
-    );
     this.apollo
       .mutate({
         mutation: DELETE_USER,
@@ -87,7 +82,13 @@ export class UsersComponent implements OnInit {
           }
         },
       })
-      .subscribe((e) => e);
+      .subscribe(() => {
+        this.store.dispatch(
+          deleteUserAction({
+            id,
+          })
+        );
+      });
   }
   click() {
     this.router.navigate(['/users/new']);
