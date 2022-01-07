@@ -3,6 +3,7 @@ import {
   getUsersActions,
   getUserActions,
   deleteUserAction,
+  addUserAction,
 } from './../actions/user.actions';
 import { createReducer, on } from '@ngrx/store';
 import { IUser } from 'src/app/user/shared/models/user.model';
@@ -46,6 +47,12 @@ const _userReducer = createReducer(
     return {
       ...state,
       users: state.users.filter((element) => element.id !== actions.id),
+    };
+  }),
+  on(addUserAction, (state, actions) => {
+    return {
+      ...state,
+      users: [...state.users, actions.user],
     };
   })
 );
