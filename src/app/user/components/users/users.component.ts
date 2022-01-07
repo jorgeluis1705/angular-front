@@ -53,7 +53,6 @@ export class UsersComponent implements OnInit {
     'apellidoP',
     'apellidoM',
     'telefono',
-    'direccion',
     'acciones',
   ];
   onName(id: string): void {
@@ -90,5 +89,7 @@ export class UsersComponent implements OnInit {
       })
       .subscribe((e) => e);
   }
-  click() {}
+  click() {
+    this.router.navigate(['/users/new']);
+  }
 }

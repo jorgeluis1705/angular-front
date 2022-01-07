@@ -1,3 +1,4 @@
+import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserResolver } from './shared/resolvers/user.resolver';
 import { UsersMainComponent } from './components/users-main/users-main.component';
 import { UsersResolver } from './shared/resolvers/users.resolver';
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: '',
     component: UsersMainComponent,
     children: [
+      {
+        path: 'new',
+        component: UserNewComponent,
+      },
       {
         path: 'list',
         component: UsersComponent,
